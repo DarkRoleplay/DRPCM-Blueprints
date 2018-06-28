@@ -1,0 +1,29 @@
+drpcmblueprints.gui.structure.var.mode.save=SPEICHERN
+drpcmblueprints.gui.structure.var.mode.load=LADEN
+drpcmblueprints.gui.structure.var.mode.corner=ECKE
+drpcmblueprints.gui.structure.var.render_mode.none=NICHTS
+drpcmblueprints.gui.structure.var.render_mode.bounding_box=UMRANDUNG
+drpcmblueprints.gui.structure.var.render_mode.all=ALLES
+
+drpcmblueprints.gui.structure.button.render_mode=Modus: %s
+drpcmblueprints.gui.structure.button.mode=Modus: %s
+drpcmblueprints.gui.structure.button.load=Blueprint Laden
+drpcmblueprints.gui.structure.button.save=Blueprint Speichern
+
+drpcmblueprints.gui.structure.label.offset=Offset:
+drpcmblueprints.gui.structure.label.offset.x=X: %d
+drpcmblueprints.gui.structure.label.offset.y=Y: %d
+drpcmblueprints.gui.structure.label.offset.z=Z: %d
+drpcmblueprints.gui.structure.label.size=Größe:
+drpcmblueprints.gui.structure.label.size.x=X: %d
+drpcmblueprints.gui.structure.label.size.y=Y: %d
+drpcmblueprints.gui.structure.label.size.z=Z: %d
+drpcmblueprints.gui.structure.label.blueprint_name=Blueprint Name:
+drpcmblueprints.gui.structure.label.architects=Architekten:
+
+drpcmblueprints.message.missing_permissions.save=Du hast keine Rechte um Blueprints zu Speichern!
+drpcmblueprints.message.missing_permissions.load=Du hast keine Rechte um Blueprints zu Laden!
+drpcmblueprints.message.success.save=Der Blueprint wurde erfolgreich gespeichert: %s
+drpcmblueprints.message.success.load=Der Blueprint wurde erfolgreich geladen: %s
+
+tile.drpcmblueprints.blueprint_controller.name=Blueprint Steuergerät

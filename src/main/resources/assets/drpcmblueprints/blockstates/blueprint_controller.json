@@ -1,0 +1,30 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+		"model": "cube_all",
+        "textures": {
+            "all": "drpcmblueprints:blocks/blueprint_controller/blueprint_controller"
+		},
+        "transform": "forge:default-block"
+    },
+	"variants": {
+		"inventory":[{}],
+		"mode": {
+			"load":{
+				"textures": {
+					"all": "drpcmblueprints:blocks/blueprint_controller/blueprint_controller_load"
+				}
+			},
+			"save":{
+				"textures": {
+					"all": "drpcmblueprints:blocks/blueprint_controller/blueprint_controller_save"
+				}
+			},
+			"corner":{
+				"textures": {
+					"all": "drpcmblueprints:blocks/blueprint_controller/blueprint_controller_corner"
+				}
+			}
+		}
+	}
+}
