@@ -37,8 +37,9 @@ public class DRPCMBlueprints{
     	}
 
 		INSTANCE.registerMessage(SyncPacket_BlueprintBlock.class, SyncPacket_BlueprintBlock.class, 0, Side.SERVER);
-		INSTANCE.registerMessage(Packet_SaveBlueprint.class, Packet_SaveBlueprint.class, 1, Side.SERVER);		
-		INSTANCE.registerMessage(Packet_LoadBlueprint.class, Packet_LoadBlueprint.class, 2, Side.SERVER);
+		INSTANCE.registerMessage(SyncPacket_BlueprintBlock.class, SyncPacket_BlueprintBlock.class, 1, Side.CLIENT);
+		INSTANCE.registerMessage(Packet_SaveBlueprint.class, Packet_SaveBlueprint.class, 2, Side.SERVER);		
+		INSTANCE.registerMessage(Packet_LoadBlueprint.class, Packet_LoadBlueprint.class, 3, Side.SERVER);
     }
     
 	public static void sendTo(IMessage message, EntityPlayerMP player) {

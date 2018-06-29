@@ -23,6 +23,8 @@ drpcmblueprints.gui.structure.label.architects=Architekten:
 
 drpcmblueprints.message.missing_permissions.save=Du hast keine Rechte um Blueprints zu Speichern!
 drpcmblueprints.message.missing_permissions.load=Du hast keine Rechte um Blueprints zu Laden!
+drpcmblueprints.message.missing_permissions.change=Du hast keine Rechte um Blueprint Controller zu ändern!
+drpcmblueprints.message.missing_permissions.see=Du hast keine Rechte um Blueprint Controller zu sehen!
 drpcmblueprints.message.success.save=Der Blueprint wurde erfolgreich gespeichert: %s
 drpcmblueprints.message.success.load=Der Blueprint wurde erfolgreich geladen: %s
 

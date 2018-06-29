@@ -32,6 +32,8 @@ public class Translations {
 
 	public static final Translation MISSING_PERMISSIONS_SAVE 	= new Translation(References.MODID + ".message.missing_permissions.save");
 	public static final Translation MISSING_PERMISSIONS_LOAD 	= new Translation(References.MODID + ".message.missing_permissions.load");
+	public static final Translation MISSING_PERMISSIONS_CHANGE 	= new Translation(References.MODID + ".message.missing_permissions.change");
+	public static final Translation MISSING_PERMISSIONS_SEE 	= new Translation(References.MODID + ".message.missing_permissions.see");
 
 	public static final Translation SUCCESS_SAVING 	= new Translation(References.MODID + ".message.success.save");
 	public static final Translation SUCCESS_LOADING 	= new Translation(References.MODID + ".message.success.load");

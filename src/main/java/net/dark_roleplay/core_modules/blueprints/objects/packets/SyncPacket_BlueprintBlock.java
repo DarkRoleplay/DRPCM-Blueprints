@@ -1,17 +1,23 @@
 package net.dark_roleplay.core_modules.blueprints.objects.packets;
 
 import io.netty.buffer.ByteBuf;
+import net.dark_roleplay.core_modules.blueprints.handler.Permissions;
+import net.dark_roleplay.core_modules.blueprints.objects.guis.GuiBlueprintController;
 import net.dark_roleplay.core_modules.blueprints.objects.other.Mode;
 import net.dark_roleplay.core_modules.blueprints.objects.other.RenderMode;
 import net.dark_roleplay.core_modules.blueprints.objects.tile_entities.TileEntityBlueprintController;
+import net.dark_roleplay.core_modules.blueprints.objects.translations.Translations;
 import net.dark_roleplay.library.networking.PacketBase;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraftforge.server.permission.PermissionAPI;
 
-public class SyncPacket_BlueprintBlock extends PacketBase.Server<SyncPacket_BlueprintBlock>{
+public class SyncPacket_BlueprintBlock extends PacketBase<SyncPacket_BlueprintBlock>{
 
 	private BlockPos pos;
 	private BlockPos offset;
@@ -61,6 +67,10 @@ public class SyncPacket_BlueprintBlock extends PacketBase.Server<SyncPacket_Blue
 
 	@Override
 	public void handleServerSide(SyncPacket_BlueprintBlock message, EntityPlayer player) {
+		if(!PermissionAPI.hasPermission(player, Permissions.BLOCK_BLUEPRINT_CHANGE)) {
+			player.sendStatusMessage(new TextComponentTranslation(Translations.MISSING_PERMISSIONS_CHANGE.getKey()), true);
+			return;
+		}
 		player.getServer().addScheduledTask(new Runnable(){
 			@Override
 			public void run() {
@@ -78,6 +88,30 @@ public class SyncPacket_BlueprintBlock extends PacketBase.Server<SyncPacket_Blue
 				te.markDirty();
 			}
 		});
+	}
+
+	@Override
+	public void handleClientSide(SyncPacket_BlueprintBlock message, EntityPlayer player) {
+		Minecraft.getMinecraft().addScheduledTask(new Runnable() {
+			@Override
+			public void run() {
+				World world = Minecraft.getMinecraft().world;
+				TileEntity tileEntity = world.getTileEntity(message.pos);
+				if(!(tileEntity instanceof TileEntityBlueprintController))
+					return;
+				TileEntityBlueprintController te = (TileEntityBlueprintController) tileEntity;
+				
+				te.setRenderMode(message.renderMode);
+				te.setName(message.name);
+				te.setOffset(message.offset);
+				te.setSize(message.size);
+				te.setMode(message.mode);
+				te.markDirty();
+				
+	    		Minecraft.getMinecraft().displayGuiScreen(new GuiBlueprintController(te));
+			}
+		});
+		
 	}
 
 }

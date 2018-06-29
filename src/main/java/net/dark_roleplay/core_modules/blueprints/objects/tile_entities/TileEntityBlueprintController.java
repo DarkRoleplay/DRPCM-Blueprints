@@ -1,12 +1,8 @@
 package net.dark_roleplay.core_modules.blueprints.objects.tile_entities;
 
-import javax.annotation.Nullable;
-
 import net.dark_roleplay.core_modules.blueprints.objects.other.Mode;
 import net.dark_roleplay.core_modules.blueprints.objects.other.RenderMode;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
@@ -72,24 +68,8 @@ public class TileEntityBlueprintController extends TileEntityBuilder {
 
 	public void markDirty() {
 		super.markDirty();
-//		this.getWorld().markBlockForUpda;
+		//this.getWorld().markAndNotifyBlock(pos, this.getWorld().getChunkFromBlockCoords(pos), this.getWorld().getBlockState(pos), this.getWorld().getBlockState(pos), 2);;
 	}
-
-	@Nullable
-	public SPacketUpdateTileEntity getUpdatePacket() {
-		return new SPacketUpdateTileEntity(this.pos, 7, this.writeToNBT(new NBTTagCompound()));
-	}
-
-	public NBTTagCompound getUpdateTag() {
-		return this.writeToNBT(new NBTTagCompound());
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-		this.readFromNBT(pkt.getNbtCompound());
-	}
-
-	
 
 	public String getName() {
 		return this.name;

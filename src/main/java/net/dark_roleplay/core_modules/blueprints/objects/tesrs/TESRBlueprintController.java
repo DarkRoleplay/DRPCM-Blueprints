@@ -26,7 +26,6 @@ public class TESRBlueprintController extends TileEntitySpecialRenderer<TileEntit
 
 			if (blockpos1.getX() >= 1 && blockpos1.getY() >= 1 && blockpos1.getZ() >= 1) {
 				if (te.getMode() == Mode.SAVE || te.getMode() == Mode.LOAD) {
-					double d0 = 0.01D;
 					double d1 = (double) blockpos.getX();
 					double d2 = (double) blockpos.getZ();
 					double d6 = y + (double) blockpos.getY() - 0.01D;
@@ -47,9 +46,6 @@ public class TESRBlueprintController extends TileEntitySpecialRenderer<TileEntit
 					d8 = d5 + d3;
 					d10 = d7 + d4;
 
-					int i = 255;
-					int j = 223;
-					int k = 127;
 					Tessellator tessellator = Tessellator.getInstance();
 					BufferBuilder bufferbuilder = tessellator.getBuffer();
 					GlStateManager.disableFog();
@@ -104,10 +100,12 @@ public class TESRBlueprintController extends TileEntitySpecialRenderer<TileEntit
 					RenderGlobal.drawBoundingBox(bufBuilder, d0, d1, d2, d3, d4, d5, 0.0F, 0.0F, 0.0F, 1.0F);
 				} else if (flag) {
 					RenderGlobal.drawBoundingBox(bufBuilder, d0, d1, d2, d3, d4, d5, 
-							ClientConfig.BLUEPRINTS.INVISIBLE_BLOCKS_COLOR.RED, ClientConfig.BLUEPRINTS.INVISIBLE_BLOCKS_COLOR.GREEN, 
-							ClientConfig.BLUEPRINTS.INVISIBLE_BLOCKS_COLOR.BLUE, ClientConfig.BLUEPRINTS.INVISIBLE_BLOCKS_COLOR.ALPHA);
+						ClientConfig.BLUEPRINTS.AIR_BLOCKS_COLOR.RED, ClientConfig.BLUEPRINTS.AIR_BLOCKS_COLOR.GREEN, 
+						ClientConfig.BLUEPRINTS.AIR_BLOCKS_COLOR.BLUE, ClientConfig.BLUEPRINTS.AIR_BLOCKS_COLOR.ALPHA);
 				} else {
-					RenderGlobal.drawBoundingBox(bufBuilder, d0, d1, d2, d3, d4, d5, 1.0F, 0.25F, 0.25F, 1.0F);
+					RenderGlobal.drawBoundingBox(bufBuilder, d0, d1, d2, d3, d4, d5, 
+						ClientConfig.BLUEPRINTS.INVISIBLE_BLOCKS_COLOR.RED, ClientConfig.BLUEPRINTS.INVISIBLE_BLOCKS_COLOR.GREEN, 
+						ClientConfig.BLUEPRINTS.INVISIBLE_BLOCKS_COLOR.BLUE, ClientConfig.BLUEPRINTS.INVISIBLE_BLOCKS_COLOR.ALPHA);
 				}
 			}
 		}
