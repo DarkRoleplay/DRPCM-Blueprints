@@ -4,7 +4,6 @@ import net.dark_roleplay.core_modules.blueprints.objects.other.Mode;
 import net.dark_roleplay.core_modules.blueprints.objects.translations.Translations;
 import net.dark_roleplay.core_modules.blueprints.objects.variables.wrappers.Variable_Mode;
 import net.dark_roleplay.library.experimental.guis.elements.Gui_Button;
-import net.minecraft.client.resources.I18n;
 
 public class Button_ChangeMode extends Gui_Button{
 

@@ -25,7 +25,6 @@ import net.dark_roleplay.library.experimental.guis.elements.buttons.Button_Chang
 import net.dark_roleplay.library.experimental.variables.wrappers.Variable_Int;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 

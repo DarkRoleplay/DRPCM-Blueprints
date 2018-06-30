@@ -16,7 +16,7 @@ public class MissingMappings {
 	@SubscribeEvent
 	public static void MissingMappingsBlock(RegistryEvent.MissingMappings<Block> event){
 		ImmutableList<Mapping<Block>> mappings = event.getAllMappings();
-		for(RegistryEvent.MissingMappings.Mapping mapping : mappings){
+		for(RegistryEvent.MissingMappings.Mapping<Block> mapping : mappings){
 			String name = mapping.key.toString();
 			if(name.equals("drpcore:blueprint_controller")){
 				mapping.remap(Blocks.BLUEPRINT_CONTROLLER);

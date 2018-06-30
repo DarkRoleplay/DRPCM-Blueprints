@@ -1,7 +1,6 @@
 package net.dark_roleplay.core_modules.blueprints.objects.tile_entities;
 
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 
 public class TileEntityBuilder extends TileEntity{

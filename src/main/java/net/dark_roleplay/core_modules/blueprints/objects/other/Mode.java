@@ -1,6 +1,5 @@
 package net.dark_roleplay.core_modules.blueprints.objects.other;
 
-import net.dark_roleplay.core_modules.blueprints.objects.tile_entities.TileEntityBlueprintController;
 import net.minecraft.util.IStringSerializable;
 
 public enum Mode implements IStringSerializable {

@@ -1,11 +1,9 @@
 package net.dark_roleplay.core_modules.blueprints.objects.guis.buttons;
 
-import net.dark_roleplay.core_modules.blueprints.References;
 import net.dark_roleplay.core_modules.blueprints.objects.other.RenderMode;
 import net.dark_roleplay.core_modules.blueprints.objects.translations.Translations;
 import net.dark_roleplay.core_modules.blueprints.objects.variables.wrappers.Variable_RenderMode;
 import net.dark_roleplay.library.experimental.guis.elements.Gui_Button;
-import net.minecraft.client.resources.I18n;
 
 public class Button_ChangeRenderMode extends Gui_Button{
 

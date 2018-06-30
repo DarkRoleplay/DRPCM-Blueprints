@@ -4,7 +4,6 @@ import net.dark_roleplay.core_modules.blueprints.References;
 import net.dark_roleplay.core_modules.blueprints.objects.other.Mode;
 import net.dark_roleplay.core_modules.blueprints.objects.other.RenderMode;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.util.IStringSerializable;
 
 public class Translations {
 		
