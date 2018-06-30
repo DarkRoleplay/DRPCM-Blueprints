@@ -8,7 +8,6 @@ import net.dark_roleplay.library.experimental.guis.elements.Gui_Button;
 public class Button_ChangeMode extends Gui_Button{
 
 	private Variable_Mode var;
-	private int amount;
 	
 	public Button_ChangeMode(Variable_Mode var, int posX, int posY, int width, int height) {
 		super(posX, posY, width, height);

@@ -75,10 +75,9 @@ public class GuiBlueprintController extends Gui_Screen {
 	private Button_ChangeInt decSizeZ;
 	private Label_AxisInt lblSizeZ;
 	private Button_ChangeInt incSizeZ;
-	
-	private Button_ChangeRenderMode btnRenderMode;
-	
+
 	private Button_ChangeMode changeMode;
+	private Button_ChangeRenderMode btnRenderMode;
 	
 	private Button_SaveLoad saveLoad;
 	
