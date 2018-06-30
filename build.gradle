@@ -9,7 +9,7 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.12.2-1.0.1"
+version = "1.12.2-1.1.0"
 group= "net.dark_roleplay.core_modules"
 archivesBaseName = "drpcmblueprints"
 
@@ -28,7 +28,7 @@ minecraft {
 repositories {
 	maven {
 		name = "DarkRoleplayMaven"
-		url = "http://dark-roleplay.net/files/maven/"
+		url = "https://dark-roleplay.net/files/maven/"
 	}
 }
 
@@ -39,7 +39,7 @@ configurations {
 }
 
 dependencies {
-  embed "darkroleplay.library:drplibrary-${mc_version}:${drp_library_version}"
+	embed "darkroleplay.drplibrary:drplibrary-${mc_version}:${drp_library_version}"
 }
 
 processResources {

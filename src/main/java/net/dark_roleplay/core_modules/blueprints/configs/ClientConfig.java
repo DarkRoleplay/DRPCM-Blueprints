@@ -7,21 +7,19 @@ import net.minecraftforge.common.config.Config;
 @Config(modid = References.MODID, name = "Dark Roleplay Core/Modules/Blueprints", category = "client")
 public class ClientConfig {
 	
-	@Config.Comment("Some Settings to customize the blueprint controller")
-	public static Blueprints BLUEPRINTS = new Blueprints();
+	@Config.Name("Color Blind Mode")
+	@Config.Comment("Enabling this will render Structure void as a Plus, to make it easier to distinguish from Air blocks")
+	public static boolean COLOR_BLIND_MODE = false;
+
+	@Config.Name("Draws two boxes for invisible blocks")
+	@Config.Comment("Increases visability but can cause higher fps drops")
+	public static boolean HIGHLIGHT_INVISIBLE_BLOCKS = true;
 	
-	public static class Blueprints{
-		
-		@Config.Name("Draws two boxes for invisible blocks")
-		@Config.Comment("Increases visability but can cause higher fps drops ")
-		public boolean HIGHLIGHT_INVISIBLE_BLOCKS = true;
-		
-		@Config.Name("Invisible Blocks color")
-		@Config.Comment("The Color in which invisible blocks will be highlighted")
-		public RGBA INVISIBLE_BLOCKS_COLOR = new RGBA(1.0F, 0.0F, 0.0F, 1.0F);
-		
-		@Config.Name("Air Blocks color")
-		@Config.Comment("The Color in which Air blocks will be highlighted")
-		public RGBA AIR_BLOCKS_COLOR = new RGBA(0.5F, 0.5F, 1.0F, 1.0F);
-	}
+	@Config.Name("Invisible Blocks color")
+	@Config.Comment("The Color in which invisible blocks will be highlighted")
+	public static RGBA INVISIBLE_BLOCKS_COLOR = new RGBA(1.0F, 0.0F, 0.0F, 1.0F);
+	
+	@Config.Name("Air Blocks color")
+	@Config.Comment("The Color in which Air blocks will be highlighted")
+	public static RGBA AIR_BLOCKS_COLOR = new RGBA(0.5F, 0.5F, 1.0F, 1.0F);
 }

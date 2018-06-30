@@ -59,7 +59,7 @@ public class TESRBlueprintController extends TileEntitySpecialRenderer<TileEntit
 						this.renderBox(tessellator, bufferbuilder, d5, d6, d7, d8, d9, d10, 255, 223, 0);
 					}else if(te.getRenderMode() == RenderMode.INVISIBLE){
 						this.renderBox(tessellator, bufferbuilder, d5, d6, d7, d8, d9, d10, 255, 223, 0);
-						if(ClientConfig.BLUEPRINTS.HIGHLIGHT_INVISIBLE_BLOCKS)
+						if(ClientConfig.HIGHLIGHT_INVISIBLE_BLOCKS)
 							this.renderInvisibleBlocks(te, x, y, z, blockpos, tessellator, bufferbuilder, true);
 						this.renderInvisibleBlocks(te, x, y, z, blockpos, tessellator, bufferbuilder, false);
 					}
@@ -88,24 +88,32 @@ public class TESRBlueprintController extends TileEntitySpecialRenderer<TileEntit
 			boolean flag1 = iblockstate == Blocks.STRUCTURE_VOID.getDefaultState();
 
 			if (flag || flag1) {
-				float f = flag ? 0.05F : 0.0F;
-				double d0 = (double) ((float) (blockpos2.getX() - blockpos.getX()) + 0.45F) + sizeX - (double) f;
-				double d1 = (double) ((float) (blockpos2.getY() - blockpos.getY()) + 0.45F) + sizeY - (double) f;
-				double d2 = (double) ((float) (blockpos2.getZ() - blockpos.getZ()) + 0.45F) + sizeZ - (double) f;
-				double d3 = (double) ((float) (blockpos2.getX() - blockpos.getX()) + 0.55F) + sizeX + (double) f;
-				double d4 = (double) ((float) (blockpos2.getY() - blockpos.getY()) + 0.55F) + sizeY + (double) f;
-				double d5 = (double) ((float) (blockpos2.getZ() - blockpos.getZ()) + 0.55F) + sizeZ + (double) f;
+				float f = flag || ClientConfig.COLOR_BLIND_MODE ? 0.05F : 0.0F;
+				double minX = (double) ((float) (blockpos2.getX() - blockpos.getX()) + 0.45F) + sizeX - (double) f;
+				double minY = (double) ((float) (blockpos2.getY() - blockpos.getY()) + 0.45F) + sizeY - (double) f;
+				double minZ = (double) ((float) (blockpos2.getZ() - blockpos.getZ()) + 0.45F) + sizeZ - (double) f;
+				double maxX = (double) ((float) (blockpos2.getX() - blockpos.getX()) + 0.55F) + sizeX + (double) f;
+				double maxY = (double) ((float) (blockpos2.getY() - blockpos.getY()) + 0.55F) + sizeY + (double) f;
+				double maxZ = (double) ((float) (blockpos2.getZ() - blockpos.getZ()) + 0.55F) + sizeZ + (double) f;
 
 				if (inside) {
-					RenderGlobal.drawBoundingBox(bufBuilder, d0, d1, d2, d3, d4, d5, 0.0F, 0.0F, 0.0F, 1.0F);
+					if(flag1 && ClientConfig.COLOR_BLIND_MODE)
+						drawColorblindBox(bufBuilder, minX, minY, minZ, maxX, maxY, maxZ, 0.0F, 0.0F, 0.0F, 1.0F);
+					else
+						RenderGlobal.drawBoundingBox(bufBuilder, minX, minY, minZ, maxX, maxY, maxZ, 0.0F, 0.0F, 0.0F, 1.0F);
 				} else if (flag) {
-					RenderGlobal.drawBoundingBox(bufBuilder, d0, d1, d2, d3, d4, d5, 
-						ClientConfig.BLUEPRINTS.AIR_BLOCKS_COLOR.RED, ClientConfig.BLUEPRINTS.AIR_BLOCKS_COLOR.GREEN, 
-						ClientConfig.BLUEPRINTS.AIR_BLOCKS_COLOR.BLUE, ClientConfig.BLUEPRINTS.AIR_BLOCKS_COLOR.ALPHA);
+					RenderGlobal.drawBoundingBox(bufBuilder, minX, minY, minZ, maxX, maxY, maxZ, 
+						ClientConfig.AIR_BLOCKS_COLOR.RED, ClientConfig.AIR_BLOCKS_COLOR.GREEN, 
+						ClientConfig.AIR_BLOCKS_COLOR.BLUE, ClientConfig.AIR_BLOCKS_COLOR.ALPHA);
 				} else {
-					RenderGlobal.drawBoundingBox(bufBuilder, d0, d1, d2, d3, d4, d5, 
-						ClientConfig.BLUEPRINTS.INVISIBLE_BLOCKS_COLOR.RED, ClientConfig.BLUEPRINTS.INVISIBLE_BLOCKS_COLOR.GREEN, 
-						ClientConfig.BLUEPRINTS.INVISIBLE_BLOCKS_COLOR.BLUE, ClientConfig.BLUEPRINTS.INVISIBLE_BLOCKS_COLOR.ALPHA);
+					if(ClientConfig.COLOR_BLIND_MODE)
+						drawColorblindBox(bufBuilder, minX, minY, minZ, maxX, maxY, maxZ, 
+							ClientConfig.INVISIBLE_BLOCKS_COLOR.RED, ClientConfig.INVISIBLE_BLOCKS_COLOR.GREEN, 
+							ClientConfig.INVISIBLE_BLOCKS_COLOR.BLUE, ClientConfig.INVISIBLE_BLOCKS_COLOR.ALPHA);
+					else
+						RenderGlobal.drawBoundingBox(bufBuilder, minX, minY, minZ, maxX, maxY, maxZ, 
+							ClientConfig.INVISIBLE_BLOCKS_COLOR.RED, ClientConfig.INVISIBLE_BLOCKS_COLOR.GREEN, 
+							ClientConfig.INVISIBLE_BLOCKS_COLOR.BLUE, ClientConfig.INVISIBLE_BLOCKS_COLOR.ALPHA);
 				}
 			}
 		}
@@ -142,4 +150,23 @@ public class TESRBlueprintController extends TileEntitySpecialRenderer<TileEntit
 	public boolean isGlobalRenderer(TileEntityBlueprintController te) {
 		return true;
 	}
+	
+	public static void drawColorblindBox(BufferBuilder buffer, double minX, double minY, double minZ, double maxX, double maxY, double maxZ, float red, float green, float blue, float alpha){
+		double centerY = minY + 0.1F;
+		double centerX = minX + 0.1F;
+		double centerZ = minZ + 0.1F;
+		
+        buffer.pos(centerX, centerY, minZ).color(red, green, blue, 0.0F).endVertex();
+        buffer.pos(centerX, centerY, minZ).color(red, green, blue, alpha).endVertex();
+        buffer.pos(centerX, centerY, maxZ).color(red, green, blue, alpha).endVertex();
+        
+        buffer.pos(centerX, minY, centerZ).color(red, green, blue, 0.0F).endVertex();
+        buffer.pos(centerX, minY, centerZ).color(red, green, blue, alpha).endVertex();
+        buffer.pos(centerX, maxY, centerZ).color(red, green, blue, alpha).endVertex();
+
+        buffer.pos(minX, centerY, centerZ).color(red, green, blue, 0.0F).endVertex();
+        buffer.pos(minX, centerY, centerZ).color(red, green, blue, alpha).endVertex();
+        buffer.pos(maxX, centerY, centerZ).color(red, green, blue, alpha).endVertex();
+        buffer.pos(maxX, centerY, centerZ).color(red, green, blue, 0.0F).endVertex();
+    }
 }
