@@ -1,5 +1,6 @@
 package net.dark_roleplay.core_modules.blueprints;
 
+import net.dark_roleplay.core_modules.blueprints.handler.Network;
 import net.dark_roleplay.core_modules.blueprints.handler.Permissions;
 import net.dark_roleplay.core_modules.blueprints.objects.packets.Packet_LoadBlueprint;
 import net.dark_roleplay.core_modules.blueprints.objects.packets.Packet_SaveBlueprint;
@@ -20,7 +21,6 @@ import net.minecraftforge.fml.relauncher.Side;
 @Mod(modid = References.MODID, name = References.NAME, version = References.VERSION, dependencies = References.DEPENDECIES)
 public class DRPCMBlueprints{
 
-	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(References.MODID);
 	
     @EventHandler
     public void preInit(FMLPreInitializationEvent event){
@@ -31,22 +31,10 @@ public class DRPCMBlueprints{
     public void init(FMLInitializationEvent event){
 
     	Permissions.init(event);
+    	Network.init(event);
     	
     	if(event.getSide().isClient()) {
     		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlueprintController.class, new TESRBlueprintController());
     	}
-
-		INSTANCE.registerMessage(SyncPacket_BlueprintBlock.class, SyncPacket_BlueprintBlock.class, 0, Side.SERVER);
-		INSTANCE.registerMessage(SyncPacket_BlueprintBlock.class, SyncPacket_BlueprintBlock.class, 1, Side.CLIENT);
-		INSTANCE.registerMessage(Packet_SaveBlueprint.class, Packet_SaveBlueprint.class, 2, Side.SERVER);		
-		INSTANCE.registerMessage(Packet_LoadBlueprint.class, Packet_LoadBlueprint.class, 3, Side.SERVER);
     }
-    
-	public static void sendTo(IMessage message, EntityPlayerMP player) {
-		INSTANCE.sendTo(message, player);
-	}
-
-	public static void sendToServer(IMessage message) {
-		INSTANCE.sendToServer(message);
-	}
 }

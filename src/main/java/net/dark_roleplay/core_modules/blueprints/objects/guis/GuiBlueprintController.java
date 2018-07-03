@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.lwjgl.input.Keyboard;
 
 import net.dark_roleplay.core_modules.blueprints.DRPCMBlueprints;
+import net.dark_roleplay.core_modules.blueprints.handler.Network;
 import net.dark_roleplay.core_modules.blueprints.objects.guis.buttons.Button_ChangeMode;
 import net.dark_roleplay.core_modules.blueprints.objects.guis.buttons.Button_ChangeRenderMode;
 import net.dark_roleplay.core_modules.blueprints.objects.guis.buttons.Button_SaveLoad;
@@ -250,7 +251,7 @@ public class GuiBlueprintController extends Gui_Screen {
 	public void onGuiClosed(){
 		this.update();
 		
-		DRPCMBlueprints.sendToServer(new SyncPacket_BlueprintBlock(this.te));
+		Network.sendToServer(new SyncPacket_BlueprintBlock(this.te));
         Keyboard.enableRepeatEvents(false);
 	}
 	
@@ -318,12 +319,12 @@ public class GuiBlueprintController extends Gui_Screen {
 	
 	public void save(){
 		this.update();
-		DRPCMBlueprints.sendToServer(new Packet_SaveBlueprint(this.te));
+		Network.sendToServer(new Packet_SaveBlueprint(this.te));
 	}
 
 	public void load(){
 		this.update();
-		DRPCMBlueprints.sendToServer(new Packet_LoadBlueprint(this.te));
+		Network.sendToServer(new Packet_LoadBlueprint(this.te));
 	}
 	
 	private void setSizeGui(boolean visible){

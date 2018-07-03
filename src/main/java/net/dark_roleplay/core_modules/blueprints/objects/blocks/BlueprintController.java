@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.dark_roleplay.core_modules.blueprints.DRPCMBlueprints;
 import net.dark_roleplay.core_modules.blueprints.References;
+import net.dark_roleplay.core_modules.blueprints.handler.Network;
 import net.dark_roleplay.core_modules.blueprints.handler.Permissions;
 import net.dark_roleplay.core_modules.blueprints.objects.other.Mode;
 import net.dark_roleplay.core_modules.blueprints.objects.packets.SyncPacket_BlueprintBlock;
@@ -47,7 +48,7 @@ public class BlueprintController extends Block{
     			return false;
     		}
     		TileEntityBlueprintController te = (TileEntityBlueprintController) world.getTileEntity(pos);
-    		DRPCMBlueprints.sendTo(new SyncPacket_BlueprintBlock(te), (EntityPlayerMP) player);
+    		Network.sendTo(new SyncPacket_BlueprintBlock(te), (EntityPlayerMP) player);
     	}
     	return true;
     }
