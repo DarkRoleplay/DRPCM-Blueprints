@@ -9,7 +9,7 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.12.2-1.1.1"
+version = "1.12.2-1.1.2"
 group= "net.dark_roleplay.core_modules"
 archivesBaseName = "drpcmblueprints"
 
@@ -39,7 +39,7 @@ configurations {
 }
 
 dependencies {
-	embed "darkroleplay.drplibrary:drplibrary-${mc_version}:${drp_library_version}"
+	embed "darkroleplay.library:drplibrary-${mc_version}:${drp_library_version}"
 }
 
 processResources {
@@ -57,6 +57,12 @@ processResources {
     }
 }
 
+//Signing the Jar
+task signJar(type: SignJar, dependsOn: reobfJar) {
+	inputFile = jar.archivePath
+	outputFile = jar.archivePath
+}
+build.dependsOn signJar
 
 jar{
 	into('META-INF/libraries'){

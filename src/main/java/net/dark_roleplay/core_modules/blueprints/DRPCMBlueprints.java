@@ -2,23 +2,15 @@ package net.dark_roleplay.core_modules.blueprints;
 
 import net.dark_roleplay.core_modules.blueprints.handler.Network;
 import net.dark_roleplay.core_modules.blueprints.handler.Permissions;
-import net.dark_roleplay.core_modules.blueprints.objects.packets.Packet_LoadBlueprint;
-import net.dark_roleplay.core_modules.blueprints.objects.packets.Packet_SaveBlueprint;
-import net.dark_roleplay.core_modules.blueprints.objects.packets.SyncPacket_BlueprintBlock;
 import net.dark_roleplay.core_modules.blueprints.objects.tesrs.TESRBlueprintController;
 import net.dark_roleplay.core_modules.blueprints.objects.tile_entities.TileEntityBlueprintController;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import net.minecraftforge.fml.relauncher.Side;
 
-@Mod(modid = References.MODID, name = References.NAME, version = References.VERSION, dependencies = References.DEPENDECIES)
+@Mod(modid = References.MODID, name = References.NAME, version = References.VERSION, dependencies = References.DEPENDECIES, certificateFingerprint = "893c317856cf6819b3a8381c5664e4b06df7d1cc")
 public class DRPCMBlueprints{
 
 	
