@@ -23,6 +23,7 @@ public class References {
 	public static final String CREDITS = "Lead Programmer: JTK222";
 	public static final String DESCRIPTION = "Dark Roleplay Core Modules are included into Dark Roleplay Core, they are used for easier modulation and updaing.";
 	
+	
 	public static Logger LOGGER;
 
 	public static File FOLDER_CONFIGS;

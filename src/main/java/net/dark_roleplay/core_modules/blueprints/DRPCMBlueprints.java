@@ -21,7 +21,6 @@ public class DRPCMBlueprints{
 
     @EventHandler
     public void init(FMLInitializationEvent event){
-
     	Permissions.init(event);
     	Network.init(event);
     	
