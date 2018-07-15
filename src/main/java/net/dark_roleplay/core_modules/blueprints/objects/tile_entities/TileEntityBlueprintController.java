@@ -105,6 +105,7 @@ public class TileEntityBlueprintController extends TileEntityBuilder {
 	}
 
 	@SideOnly(Side.CLIENT)
+	@Override
 	public AxisAlignedBB getRenderBoundingBox() {
 		return INFINITE_EXTENT_AABB;
 	}
