@@ -2,6 +2,7 @@ package net.dark_roleplay.core_modules.blueprints;
 
 import net.dark_roleplay.core_modules.blueprints.handler.Network;
 import net.dark_roleplay.core_modules.blueprints.handler.Permissions;
+import net.dark_roleplay.core_modules.blueprints.objects.commands.CreateBluprintController;
 import net.dark_roleplay.core_modules.blueprints.objects.tesrs.TESRBlueprintController;
 import net.dark_roleplay.core_modules.blueprints.objects.tile_entities.TileEntityBlueprintController;
 import net.dark_roleplay.library.sides.IProxy;
@@ -11,6 +12,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -45,5 +47,10 @@ public class DRPCMBlueprints{
 		public void init(FMLInitializationEvent event) {
 			ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlueprintController.class, new TESRBlueprintController());
 		}
+	}
+	
+	@EventHandler
+	public void serverLoad(FMLServerStartingEvent event) {
+		event.registerServerCommand(new CreateBluprintController());
 	}
 }
