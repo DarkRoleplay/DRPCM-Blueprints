@@ -9,7 +9,7 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.12.2-1.2.0"
+version = "1.12.2-1.2.1"
 group= "net.dark_roleplay.core_modules"
 archivesBaseName = "drpcmblueprints"
 
@@ -59,17 +59,16 @@ processResources {
 
 //Signing the Jar
 task signJar(type: SignJar, dependsOn: reobfJar) {
-    onlyIf {
-        project.hasProperty('keyStore')
-    }
+    if(project.hasProperty('keyStore')){
 
-	keyStore = project.findProperty('keyStore')
-    alias = project.findProperty('keyStoreAlias')
-    storePass = project.findProperty('keyStorePass')
-    keyPass = project.findProperty('keyStoreKeyPass')
-	
-    inputFile = jar.archivePath
-    outputFile = jar.archivePath
+		keyStore = project.findProperty('keyStore')
+		alias = project.findProperty('keyStoreAlias')
+		storePass = project.findProperty('keyStorePass')
+		keyPass = project.findProperty('keyStoreKeyPass')
+		
+		inputFile = jar.archivePath
+		outputFile = jar.archivePath
+	}
 }
 build.dependsOn signJar
 
@@ -80,7 +79,7 @@ jar{
 
 	manifest {
 		attributes([
-            'ContainedDeps': configurations.embed.collect { it.getName() }.join(' '),
+            //'ContainedDeps': configurations.embed.collect { it.getName() }.join(' '),
 			'Maven-Artifact': "${project.group}:${project.archivesBaseName}:${project.version}",
 			'Timestamp': System.currentTimeMillis()
 		])
