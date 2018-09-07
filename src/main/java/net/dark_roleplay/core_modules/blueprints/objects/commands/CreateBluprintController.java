@@ -2,6 +2,7 @@ package net.dark_roleplay.core_modules.blueprints.objects.commands;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import net.dark_roleplay.core_modules.blueprints.configs.ServerConfig;
@@ -18,7 +19,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.server.permission.PermissionAPI;
-import scala.actors.threadpool.Arrays;
 
 public class CreateBluprintController implements ICommand{
 

@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class References {
 	public static final String MODID = "drpcmblueprints";
 	public static final String NAME = "Dark Roleplay Core Module Blueprints";
-	public static final String VERSION = "1.12.2-1.2.1";
+	public static final String VERSION = "1.12.2-1.2.2";
 	public static final String ACCEPTEDVERSIONS = "[1.12.2,1.13)";
 	public static final String UPDATE_JSON = "https://dark-roleplay.net/files/versions/core_modules/drpcmblueprints/drpcmblueprints-1.12.2.json";
 	public static final String DEPENDECIES = "required-after:forge@[1.12.2-14.23.4.2705,);required-after:drplibrary@[1.12.2-0.1.0.5,)";
