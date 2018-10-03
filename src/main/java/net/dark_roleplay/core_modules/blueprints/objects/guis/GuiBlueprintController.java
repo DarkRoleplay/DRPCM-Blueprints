@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.lwjgl.input.Keyboard;
 
-import net.dark_roleplay.core_modules.blueprints.DRPCMBlueprints;
 import net.dark_roleplay.core_modules.blueprints.handler.Network;
 import net.dark_roleplay.core_modules.blueprints.objects.guis.buttons.Button_ChangeMode;
 import net.dark_roleplay.core_modules.blueprints.objects.guis.buttons.Button_ChangeRenderMode;
@@ -23,7 +22,7 @@ import net.dark_roleplay.library.experimental.guis.elements.Gui_Frame;
 import net.dark_roleplay.library.experimental.guis.elements.Gui_Label;
 import net.dark_roleplay.library.experimental.guis.elements.Gui_Screen;
 import net.dark_roleplay.library.experimental.guis.elements.buttons.Button_ChangeInt;
-import net.dark_roleplay.library.experimental.variables.wrappers.Variable_Int;
+import net.dark_roleplay.library.experimental.variables.wrappers.IntegerWrapper;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.init.SoundEvents;
@@ -33,27 +32,27 @@ public class GuiBlueprintController extends Gui_Screen {
 
 	private TileEntityBlueprintController te;
 
-	private Variable_Int offsetX;
-	private Variable_Int offsetY;
-	private Variable_Int offsetZ;
-	
-	private Variable_Int sizeX;
-	private Variable_Int sizeY;
-	private Variable_Int sizeZ;
-	
+	private IntegerWrapper offsetX;
+	private IntegerWrapper offsetY;
+	private IntegerWrapper offsetZ;
+
+	private IntegerWrapper sizeX;
+	private IntegerWrapper sizeY;
+	private IntegerWrapper sizeZ;
+
 	private Variable_RenderMode renderMode;
-	
+
 	private Variable_Mode mode;
-	
+
 	private String name = "";
 	private String architects = "";
-	
-	
+
+
 	private int posX;
 	private int posY;
-	
+
 	private Gui_Frame mainFrame;
-	
+
 
 	private Gui_Label lblOffset;
 	private Button_ChangeInt decOffsetX;
@@ -65,7 +64,7 @@ public class GuiBlueprintController extends Gui_Screen {
 	private Button_ChangeInt decOffsetZ;
 	private Label_AxisInt lblOffsetZ;
 	private Button_ChangeInt incOffsetZ;
-	
+
 	private Gui_Label lblSize;
 	private Button_ChangeInt decSizeX;
 	private Label_AxisInt lblSizeX;
@@ -79,47 +78,47 @@ public class GuiBlueprintController extends Gui_Screen {
 
 	private Button_ChangeMode changeMode;
 	private Button_ChangeRenderMode btnRenderMode;
-	
+
 	private Button_SaveLoad saveLoad;
-	
+
 	private int nameEditPosX, nameEditPosY, nameEditSizeX, nameEditSizeY;
     private GuiTextField nameEdit;
 	private Gui_Label lblNameEdit;
-    
+
     private int architectsPosX, architectsPosY, architectsSizeX, architectsSizeY;
 	private Gui_Label lblArchitectsEdit;
     private GuiTextField architectsEdit;
-    
+
     private GuiTextField focused;
-    
+
 	private boolean initialized = false;
-	
+
 	public GuiBlueprintController(TileEntityBlueprintController te){
 		this.te = te;
 		BlockPos offset = te.getOffset();
-		this.offsetX = new Variable_Int(offset.getX());
-		this.offsetY = new Variable_Int(offset.getY());
-		this.offsetZ = new Variable_Int(offset.getZ());
-		
+		this.offsetX = new IntegerWrapper(offset.getX());
+		this.offsetY = new IntegerWrapper(offset.getY());
+		this.offsetZ = new IntegerWrapper(offset.getZ());
+
 		BlockPos size = te.getSize();
-		this.sizeX = new Variable_Int(size.getX());
-		this.sizeY = new Variable_Int(size.getY());
-		this.sizeZ = new Variable_Int(size.getZ());
-		
+		this.sizeX = new IntegerWrapper(size.getX());
+		this.sizeY = new IntegerWrapper(size.getY());
+		this.sizeZ = new IntegerWrapper(size.getZ());
+
 		this.name = te.getName();
 		this.architects = te.getArchitects();
-		
+
 		this.renderMode = new Variable_RenderMode(te.getRenderMode());
-		
+
 		this.mode = new Variable_Mode(te.getMode());
 	}
-	
+
 	@Override
 	public void updateScreen(){
 		this.nameEdit.updateCursorCounter();
 		this.architectsEdit.updateCursorCounter();
 	}
-	
+
 	public void update(){
 		switch(this.mode.get()){
 			case CORNER:
@@ -156,14 +155,14 @@ public class GuiBlueprintController extends Gui_Screen {
 		this.te.setName(this.name);
 		this.te.setArchitects(this.architects);
 	}
-	
+
 	@Override
 	public void initGui(){
         Keyboard.enableRepeatEvents(true);
 
 		this.posX = (this.width / 2) - 150;
 		this.posY = (this.height / 2) - 100;
-		
+
 		int currentHeight = 0;
 		int left = 0;
 		int center = 145;
@@ -172,27 +171,27 @@ public class GuiBlueprintController extends Gui_Screen {
 		int lblHeight = 10;
 		int btnHeight = 20;
 		int spacer = 2;
-		
+
 		if(!this.initialized){
 			this.mainFrame = new Gui_Frame(this, this.posX, this.posY, 300, 200);
-			
+
 			//Mode Button
 			this.mainFrame.addChild(this.changeMode = new Button_ChangeMode(this.mode, left, currentHeight, halfWidth, btnHeight));
 			//save Load Button
 			this.mainFrame.addChild(this.saveLoad = new Button_SaveLoad(this, this.mode.get() == Mode.SAVE ? true : false, center, currentHeight, halfWidth, btnHeight));
-			
+
 			currentHeight += btnHeight + spacer;
-			
+
 			this.mainFrame.addChild(this.lblNameEdit = new Gui_Label(Translations.NAME.get(), 0xFFFFFFFF, 0, currentHeight));
 			this.lblNameEdit.setSize(fullWidth, 10);
-			
+
 			currentHeight += btnHeight + lblHeight + (spacer * 3);
-			
+
 			this.mainFrame.addChild(this.lblOffset = new Gui_Label(Translations.LABEL_OFFSET.get(), 0xFFFFFFFF, 0, currentHeight));
 			this.lblOffset.setSize(fullWidth, 20);
-			
+
 			currentHeight += lblHeight + spacer;
-			
+
 			this.mainFrame.addChild(this.decOffsetX = (Button_ChangeInt) new Button_ChangeInt(this.offsetX, 	-1, 1, 		currentHeight, 12, btnHeight).setText("-"));
 			this.mainFrame.addChild(this.lblOffsetX = (Label_AxisInt) (new Label_AxisInt(this.offsetX, Translations.LABEL_OFFSET_X.getKey(), 0xFFFFFFFF, 13, currentHeight + 5).setSize(67, 10)));
 			this.mainFrame.addChild(this.incOffsetX = (Button_ChangeInt) new Button_ChangeInt(this.offsetX, 	1, 	81, 	currentHeight, 12, btnHeight).setText("+"));
@@ -204,12 +203,12 @@ public class GuiBlueprintController extends Gui_Screen {
 			this.mainFrame.addChild(this.incOffsetZ =(Button_ChangeInt)  new Button_ChangeInt(this.offsetZ, 	1, 	275, 	currentHeight, 12, btnHeight).setText("+"));
 
 			currentHeight += btnHeight + spacer;
-			
+
 			this.mainFrame.addChild(this.lblSize = new Gui_Label(Translations.LABEL_SIZE.get(), 0xFFFFFFFF, 0, currentHeight));
 			this.lblSize.setSize(fullWidth, 10);
-			
+
 			currentHeight += lblHeight + spacer;
-			
+
 			this.mainFrame.addChild(this.decSizeX = (Button_ChangeInt) new Button_ChangeInt(this.sizeX, 	-1, 	1, 		currentHeight, 12, btnHeight).setText("-"));
 			this.mainFrame.addChild(this.lblSizeX = (Label_AxisInt) (new Label_AxisInt(this.sizeX, Translations.LABEL_SIZE_X.getKey(), 0xFFFFFFFF, 13, currentHeight + 5).setSize(67, 10)));
 			this.mainFrame.addChild(this.incSizeX = (Button_ChangeInt) new Button_ChangeInt(this.sizeX, 	1, 		81, 	currentHeight, 12, btnHeight).setText("+"));
@@ -219,42 +218,42 @@ public class GuiBlueprintController extends Gui_Screen {
 			this.mainFrame.addChild(this.decSizeZ = (Button_ChangeInt) new Button_ChangeInt(this.sizeZ, 	-1, 	195,	currentHeight, 12, btnHeight).setText("-"));
 			this.mainFrame.addChild(this.lblSizeZ = (Label_AxisInt) (new Label_AxisInt(this.sizeZ, Translations.LABEL_SIZE_Z.getKey(), 0xFFFFFFFF, 207, currentHeight + 5).setSize(67, 10)));
 			this.mainFrame.addChild(this.incSizeZ = (Button_ChangeInt) new Button_ChangeInt(this.sizeZ, 	1, 		275, 	currentHeight, 12, btnHeight).setText("+"));
-			
+
 			currentHeight += btnHeight + spacer;
-			
+
 			this.mainFrame.addChild(this.lblArchitectsEdit = new Gui_Label(Translations.LABEL_ARCHITECTS.get(), 0xFFFFFFFF, 0, currentHeight));
 			this.lblArchitectsEdit.setSize(fullWidth, lblHeight);
-			
+
 			currentHeight += lblHeight + spacer;
 
 			currentHeight += btnHeight;
-			
+
 			this.mainFrame.addChild(this.btnRenderMode = new Button_ChangeRenderMode(this.renderMode, 0, 11 + currentHeight, 288, 20));
 
 			this.addElement(this.mainFrame);
 			this.initialized = true;
 		}
-		
+
 		this.mainFrame.setPos(this.posX, this.posY);
 		this.nameEdit = new GuiTextField(0, this.fontRenderer,(this.nameEditPosX = this.posX + 5), (this.nameEditPosY = this.posY + 40), (this.nameEditSizeX = 290), (this.nameEditSizeY = btnHeight));
         this.nameEdit.setMaxStringLength(64);
         this.nameEdit.setText(this.name);
-        
+
         this.architectsEdit = new GuiTextField(1, this.fontRenderer,(this.architectsPosX = this.posX + 5), (this.architectsPosY = this.posY + 144), (this.architectsSizeX = 290), (this.architectsSizeY = btnHeight));
         this.architectsEdit.setMaxStringLength(256);
         this.architectsEdit.setText(this.architects);
 
-		update();
+		this.update();
     }
-	
+
 	@Override
 	public void onGuiClosed(){
 		this.update();
-		
+
 		Network.sendToServer(new SyncPacket_BlueprintBlock(this.te));
         Keyboard.enableRepeatEvents(false);
 	}
-	
+
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks){
 		this.drawDefaultBackground();
@@ -262,7 +261,7 @@ public class GuiBlueprintController extends Gui_Screen {
         this.nameEdit.drawTextBox();
         this.architectsEdit.drawTextBox();
 	}
-	
+
 	@Override
 	protected void keyTyped(char typedChar, int keyCode) throws IOException{
         if (this.nameEdit.getVisible() && this.nameEdit.isFocused() && isValidCharacterForName(typedChar, keyCode)){
@@ -272,7 +271,7 @@ public class GuiBlueprintController extends Gui_Screen {
             this.architectsEdit.textboxKeyTyped(typedChar, keyCode);
             this.architects = this.architectsEdit.getText();
         }
-        
+
         if(keyCode == 1){
         	if(this.focused == null){
         		this.mc.displayGuiScreen(null);
@@ -283,7 +282,7 @@ public class GuiBlueprintController extends Gui_Screen {
         }
         this.update();
     }
-	
+
 	private void setFocused(GuiTextField field){
 		if(this.focused != null)
 			this.focused.setFocused(false);
@@ -291,20 +290,20 @@ public class GuiBlueprintController extends Gui_Screen {
 		if(field != null)
 			field.setFocused(true);
 	}
-	
+
 	@Override
 	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException{
         if (mouseButton == 0){
-			if((mouseX > this.nameEditPosX && mouseX < nameEditPosX + nameEditSizeX) && (mouseY > this.nameEditPosY && mouseY < nameEditPosY + nameEditSizeY)){
+			if((mouseX > this.nameEditPosX && mouseX < this.nameEditPosX + this.nameEditSizeX) && (mouseY > this.nameEditPosY && mouseY < this.nameEditPosY + this.nameEditSizeY)){
 				this.setFocused(this.nameEdit);
 				return;
-			}else if((mouseX > this.architectsPosX && mouseX < architectsPosX + architectsSizeX) && (mouseY > this.architectsPosY && mouseY < architectsPosY + architectsSizeY)){
+			}else if((mouseX > this.architectsPosX && mouseX < this.architectsPosX + this.architectsSizeX) && (mouseY > this.architectsPosY && mouseY < this.architectsPosY + this.architectsSizeY)){
 				this.setFocused(this.architectsEdit);
 				return;
 			}else{
 				this.setFocused(null);
 			}
-        	
+
         	for(int i = 0; i < this.elements.size(); ++i){
     			IGuiElement element = this.elements.get(i);
     			if((mouseX > element.getPosX() && mouseX < element.getPosX() + element.getWidth()) && (mouseY > element.getPosY() && mouseY < element.getPosY() + element.getHeight())){
@@ -316,7 +315,7 @@ public class GuiBlueprintController extends Gui_Screen {
         }
 		this.update();
     }
-	
+
 	public void save(){
 		this.update();
 		Network.sendToServer(new Packet_SaveBlueprint(this.te));
@@ -326,7 +325,7 @@ public class GuiBlueprintController extends Gui_Screen {
 		this.update();
 		Network.sendToServer(new Packet_LoadBlueprint(this.te));
 	}
-	
+
 	private void setSizeGui(boolean visible){
 		this.lblSize.setVisible(visible);
 		this.lblSizeX.setVisible(visible);
@@ -339,7 +338,7 @@ public class GuiBlueprintController extends Gui_Screen {
 		this.incSizeY.setVisible(visible);
 		this.incSizeZ.setVisible(visible);
 	}
-	
+
 	private void setOffsetGui(boolean visible){
 		this.lblOffset.setVisible(visible);
 		this.lblOffsetX.setVisible(visible);
@@ -352,22 +351,22 @@ public class GuiBlueprintController extends Gui_Screen {
 		this.incOffsetY.setVisible(visible);
 		this.incOffsetZ.setVisible(visible);
 	}
-	
+
 	private void setNameGui(boolean visible){
 		this.lblNameEdit.setVisible(visible);
 		this.nameEdit.setVisible(visible);
 	}
-	
+
 	private void setArchitectsGui(boolean visible){
 		this.lblArchitectsEdit.setVisible(visible);
 		this.architectsEdit.setVisible(visible);
 	}
-	
+
 	private void setBBGui(boolean visible){
 		this.btnRenderMode.setVisible(visible);
 	}
-	
-    public static final char[] ILLEGAL_CHARACTERS = new char[] {'/', '.', '\n', '\r', '\t', '\u0000', '\f', '`', '?', '*', '\\', '<', '>', '|', '"', ':', ','};															
+
+    public static final char[] ILLEGAL_CHARACTERS = new char[] {'/', '.', '\n', '\r', '\t', '\u0000', '\f', '`', '?', '*', '\\', '<', '>', '|', '"', ':', ','};
     public static final int[] LEGAL_KEY_CODES = new int[] {203, 205, 14, 211, 199, 207};
 	private static boolean isValidCharacterForName(char c, int keyCode){
         boolean flag = true;
