@@ -25,15 +25,15 @@ public class Blocks {
 			event.getRegistry(),
 			new BlueprintController("blueprint_controller")
 		);
-		
+
 		GameRegistry.registerTileEntity(TileEntityBlueprintController.class, new ResourceLocation(References.MODID, "structure_controller"));
 
 	}
-	
+
 	private static final void registerBlocks(IForgeRegistry<Block> registry, Block... blocks){
 		for(Block block : blocks){
 			registry.register(block);
-			Items.addBlockItem((ItemBlock) new ItemBlock(block).setRegistryName(block.getRegistryName()).setUnlocalizedName(block.getUnlocalizedName()));
+			Items.addBlockItem((ItemBlock) new ItemBlock(block).setRegistryName(block.getRegistryName()).setTranslationKey(block.getTranslationKey()));
 		}
 	}
 }

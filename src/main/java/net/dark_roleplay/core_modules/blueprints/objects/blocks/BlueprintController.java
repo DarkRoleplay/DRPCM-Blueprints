@@ -2,7 +2,6 @@ package net.dark_roleplay.core_modules.blueprints.objects.blocks;
 
 import java.util.Random;
 
-import net.dark_roleplay.core_modules.blueprints.DRPCMBlueprints;
 import net.dark_roleplay.core_modules.blueprints.References;
 import net.dark_roleplay.core_modules.blueprints.handler.Network;
 import net.dark_roleplay.core_modules.blueprints.handler.Permissions;
@@ -36,7 +35,7 @@ public class BlueprintController extends Block{
         super(Material.IRON, MapColor.SILVER);
         this.setDefaultState(this.blockState.getBaseState());
         this.setRegistryName(name);
-        this.setUnlocalizedName(References.MODID + "." + name);
+        this.setTranslationKey(References.MODID + "." + name);
         this.setBlockUnbreakable();
     }
 
@@ -52,7 +51,7 @@ public class BlueprintController extends Block{
     	}
     	return true;
     }
-    
+
     @Override
     public int quantityDropped(Random random){
         return 0;
@@ -67,7 +66,7 @@ public class BlueprintController extends Block{
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
         return this.getDefaultState().withProperty(MODE, Mode.LOAD);
     }
-    
+
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos){
     	TileEntity te = world.getTileEntity(pos);
@@ -77,19 +76,19 @@ public class BlueprintController extends Block{
     	return state;
     }
 
-    
+
     @Override
     public boolean hasTileEntity(IBlockState state){
         return true;
     }
-    
+
     @Override
     public TileEntity createTileEntity(World world, IBlockState state){
         return new TileEntityBlueprintController();
     }
-    
+
     /** ---- TODO: Remove in 1.13 ---- **/
-    
+
     @Override
     public IBlockState getStateFromMeta(int meta){
         return this.getDefaultState();
