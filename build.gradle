@@ -9,7 +9,7 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.12.2-1.2.2"
+version = "1.12.2-1.2.2-SNAPSHOT"
 group = "net.dark_roleplay.core_modules"
 archivesBaseName = "drpcmblueprints"
 
