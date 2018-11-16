@@ -9,7 +9,7 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.12.2-1.2.2-SNAPSHOT"
+version = "1.12.2-1.2.3"
 group = "net.dark_roleplay.core_modules"
 archivesBaseName = "drpcmblueprints"
 
@@ -38,4 +38,4 @@ apply from: 'https://dark-roleplay.net/files/gradle_helpers/1.12.2/mcmod_info.gr
 apply from: 'https://dark-roleplay.net/files/gradle_helpers/1.12.2/signing.gradle'
 apply from: 'https://dark-roleplay.net/files/gradle_helpers/1.12.2/contained_jar.gradle'
 apply from: 'https://dark-roleplay.net/files/gradle_helpers/1.12.2/publishing.gradle'
-apply from: 'https://dark-roleplay.net/files/gradle_helpers/1.12.2/mod_maven.gradle'}
+apply from: 'https://dark-roleplay.net/files/gradle_helpers/1.12.2/mod_maven.gradle'
